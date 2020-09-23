@@ -1,28 +1,28 @@
 <template>
   <div id="app">
-    <router-view />
-    <tab-bar :list="list"></tab-bar>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+    <tabbar :list="list"></tabbar>
   </div>
 </template>
 
 <script>
-import tabbar from "./components/tabbar.vue";
 export default {
   name: "App",
   data() {
     return {
       list: [
-        { title: '首页' },
-        { title: '商城' },
-        { title: '我的' },
-        ],
+        { title: "首页", path: "/home" },
+        { title: "商城", path: "/store" },
+        { title: "我的", path: "/profile" },
+      ],
     };
   },
-  conponents: {
-    tabbar,
+  components: {
+    tabbar: () => import("./components/tabbar"),
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
