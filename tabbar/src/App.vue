@@ -15,14 +15,16 @@ export default {
       list: [
         { title: "首页", path: "/home" },
         { title: "商城", path: "/store" },
-        { title: "我的", path: "/profile" },
-      ],
+        { title: "我的", path: "/profile" }
+      ]
     };
   },
   components: {
-    tabbar: () => import("./components/tabbar"),
-  },
+    tabbar: () => import("./components/tabbar/tabbar")
+  }
 };
 </script>
 
-<style></style>
+<style lang="less">
+@import "./assets/css/base.less";
+</style>

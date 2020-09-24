@@ -11,15 +11,16 @@ export default new Router({
     },
     {
       path: "/home",
-      component: () => import("../components/Home.vue")
+      component: () => import("../views/home/Home.vue")
     },
     {
       path: "/store",
-      component: () => import("../components/Store")
+      component: () => import("../views/store/Store.vue")
     },
     {
       path: "/profile",
-      component: () => import("../components/Profile")
+      component: () => import("../views/profile/Profile.vue")
     }
-  ]
+  ],
+  mode: "history"
 });
