@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模拟异步</title>
+</head>
+
+<body></body>
+<script>
+  // 一般情况下使用异步操作时，使用Promise异步操作进行相关的封装
+  // new：构造函数（1.保存一些状态信息  2.执行传入的函数）
+
+  // 简单举例-链式编程
+  // 参数 -> 函数(resolve, reject)，resolve, reject本身就是函数
+  new Promise((resolve, reject) => {
+    setTimeout(function () {
+      console.log('1');
+      // 成功：一旦调用resolve()，就会执行then
+      resolve('data');
+      // 失败：一旦调用resolve()，就会执行catch
+      // reject(data);
+    }, 1000);
+  }).then((data) => {
+    return new Promise((resolve, reject) => {
+      console.log('2');
+      resolve();
+    })
+  }).then(() => {
+    return new Promise((resolve, reject) => {
+      console.log('3');
+    })
+  }).catch(() => {
+
+  });
+  // 简写
+  new Promise((resolve, reject) => {
+    setTimeout(function () {
+      console.log('1');
+      resolve('data');
+    }, 1000);
+  }).then((data) => {
+    console.log('2');
+    // return Promise.resolve(data);  // return Promise.reject(data)
+    return data;  // 两种return简写都可
+  }).then(() => {
+    console.log('3');
+    return data;
+  }).catch(() => {
+
+  });
+  // 简单举例-all用法
+  Promise.all([
+    new Promise((resolve, reject) => {
+      $ajax({
+        url: 'url1',
+        success: function (data) {
+          resolve(data)
+        }
+      });
+    }),
+    new Promise((resolve, reject) => {
+      $ajax({
+        url: 'url2',
+        success: function (data) {
+          resolve(data)
+        }
+      });
+    })
+  ]).then(result => {
+
+  });
+</script>
+
+</html>
